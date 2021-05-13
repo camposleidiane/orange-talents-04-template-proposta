@@ -31,4 +31,24 @@ public class NovaPropostaRequest {
 		return new Proposta(email, nome, endereco, salario, documento);
 	}
 
+	public String getDocumento() {
+		return documento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public BigDecimal getSalario() {
+		return salario;
+	}
+	
 }

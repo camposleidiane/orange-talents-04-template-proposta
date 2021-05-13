@@ -1,6 +1,7 @@
 package zupacademy.leidiane.proposta.proposta;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -28,6 +29,13 @@ public class PropostaController {
 	public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaRequest request, UriComponentsBuilder builder) {
 		
 		Proposta novaProposta = request.toModel();
+		
+		Optional<Proposta> propDocumento = propostaRepository.findByDocumento(novaProposta.getDocumento());
+		
+		if(propDocumento.isPresent()) {
+			return ResponseEntity.status(422).body("Já existe uma proposta para esse solicitante!");
+		}
+		
 		propostaRepository.save(novaProposta);
 		URI enderecoConsulta = builder.path("/propostas/{id}").build(novaProposta.getId());
 		return ResponseEntity.created(enderecoConsulta).build();
@@ -35,3 +43,4 @@ public class PropostaController {
 	}
 	
 }
+ 
