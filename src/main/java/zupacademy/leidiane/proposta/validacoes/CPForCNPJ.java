@@ -19,8 +19,8 @@ import org.hibernate.validator.constraints.br.CPF;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint (validatedBy= {})
-@ConstraintComposition(CompositionType.OR)
 @CPF
+@ConstraintComposition(CompositionType.OR)
 @CNPJ
 @ReportAsSingleViolation
 

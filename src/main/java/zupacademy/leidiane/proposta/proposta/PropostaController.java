@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import feign.FeignException;
+
 @RestController
 @RequestMapping("/api")
 public class PropostaController {
 	
 	@Autowired PropostaRepository propostaRepository;
 	
-	public PropostaController (PropostaRepository propostaRepository) {
-		this.propostaRepository = propostaRepository;
-	}
+	@Autowired AnaliseSolicitacaoClient analiseClient;
 	
 	@PostMapping("/propostas")
-	@Transactional
 	public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaRequest request, UriComponentsBuilder builder) {
 		
 		Proposta novaProposta = request.toModel();
@@ -37,6 +36,25 @@ public class PropostaController {
 		}
 		
 		propostaRepository.save(novaProposta);
+		
+		
+		
+		try {
+			AnaliseDePropostaRequest analiseRequest = new AnaliseDePropostaRequest(novaProposta.getDocumento(),
+																					novaProposta.getNome(),
+																					novaProposta.getId());
+			AnaliseDaPropostaResponse resultadoDaConsulta = analiseClient.consulta(analiseRequest);
+			Status status = resultadoDaConsulta.status();
+			novaProposta.setStatus(status);
+			
+		} catch (FeignException.UnprocessableEntity unprocessableEntity) {
+			novaProposta.setStatus(Status.NAO_ELEGIVEL);
+		} catch (FeignException.ServiceUnavailable ex) {
+			propostaRepository.delete(novaProposta);
+		}
+		
+		propostaRepository.save(novaProposta);
+		
 		URI enderecoConsulta = builder.path("/propostas/{id}").build(novaProposta.getId());
 		return ResponseEntity.created(enderecoConsulta).build();
 		
