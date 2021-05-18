@@ -2,17 +2,19 @@ package zupacademy.leidiane.proposta.proposta;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-
+import zupacademy.leidiane.proposta.cartao.Cartao;
 import zupacademy.leidiane.proposta.validacoes.CPForCNPJ;
 
 @Entity
@@ -25,6 +27,7 @@ public class Proposta {
 	@NotNull @NotBlank private String endereco;
 	@NotNull @Positive private BigDecimal salario;
 	@Enumerated(EnumType.STRING) private Status status;
+	@OneToOne(cascade = CascadeType.ALL) private Cartao cartao;
 	
 	public Proposta () {
 	}
@@ -59,8 +62,11 @@ public class Proposta {
 	}
 
 	public void setStatus(Status status) {
-		this.status = status;
-		
+		this.status = status;	
+	}
+	
+	public void setCartao (Cartao cartao) {
+		this.cartao = cartao;
 	}
 
 }

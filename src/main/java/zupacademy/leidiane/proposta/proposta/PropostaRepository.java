@@ -1,7 +1,9 @@
 package zupacademy.leidiane.proposta.proposta;
 
 import java.util.Optional;
+import java.util.Set;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface PropostaRepository extends CrudRepository<Proposta, Long> {
 	
 	Optional<Proposta> findByDocumento (String documento);
+	
+	@Query("SELECT p FROM Proposta p WHERE p.status = 'ELEGIVEL'" +
+	        "AND p.cartao.id = NULL")
+	Set<Proposta>propostasElegiveis();
 
 }
