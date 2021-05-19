@@ -62,14 +62,14 @@ public class PropostaController {
 	}
 	
 	@GetMapping("/propostas/{id}")
-	public ResponseEntity<PropostaResponse> acompanhaProposta(@PathVariable("id") Long id) {
+	public ResponseEntity<?> acompanhaProposta(@PathVariable("id") Long id) {
 		
 		Optional <Proposta> propId = propostaRepository.findById(id);
 		
 		if(propId.isPresent()) {
 			return ResponseEntity.ok(new PropostaResponse(propId.get()));
 		}
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.status(404).body("Não existe solicitante com esse id!");
 		
 	}
 }
