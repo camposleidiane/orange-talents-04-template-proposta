@@ -59,6 +59,10 @@ public class Proposta {
 	}
 	public BigDecimal getSalario() {
 		return salario;
+	}	
+	
+	public Status getStatus() {
+		return status;
 	}
 
 	public void setStatus(Status status) {

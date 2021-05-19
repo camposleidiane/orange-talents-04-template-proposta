@@ -6,7 +6,7 @@ public class AnaliseDaPropostaResponse {
 	private String nome;
 	private Long idProposta;
 	private ResultadoSolicitacao resultadoSolicitacao;
-	
+
 	public String getDocumento() {
 		return documento;
 	}

@@ -3,11 +3,12 @@ package zupacademy.leidiane.proposta.proposta;
 import java.net.URI;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,5 +61,17 @@ public class PropostaController {
 		
 	}
 	
+	@GetMapping("/propostas/{id}")
+	public ResponseEntity<PropostaResponse> acompanhaProposta(@PathVariable("id") Long id) {
+		
+		Optional <Proposta> propId = propostaRepository.findById(id);
+		
+		if(propId.isPresent()) {
+			return ResponseEntity.ok(new PropostaResponse(propId.get()));
+		}
+		return ResponseEntity.notFound().build();
+		
+	}
 }
+
  
