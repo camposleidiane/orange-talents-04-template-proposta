@@ -1,11 +1,11 @@
-package zupacademy.leidiane.proposta.proposta;
+package zupacademy.leidiane.proposta.proposta.analise;
 
-public class AnaliseDaPropostaResponse {
+public class AnalisePropostaResponse {
 
 	private String documento;
 	private String nome;
 	private Long idProposta;
-	private ResultadoSolicitacao resultadoSolicitacao;
+	private ResultadoSolicitacaoEnum resultadoSolicitacao;
 
 	public String getDocumento() {
 		return documento;
@@ -19,11 +19,11 @@ public class AnaliseDaPropostaResponse {
 		return idProposta;
 	}
 	
-	public ResultadoSolicitacao getResultadoSolicitacao() {
+	public ResultadoSolicitacaoEnum getResultadoSolicitacao() {
 		return resultadoSolicitacao;
 	}
 
-	public Status status() {
+	public StatusEnum status() {
 		return resultadoSolicitacao.getStatus();
 	}
 }

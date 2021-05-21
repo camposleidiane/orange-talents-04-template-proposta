@@ -1,4 +1,4 @@
-package zupacademy.leidiane.proposta.validacoes;
+package zupacademy.leidiane.proposta.utils.validations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

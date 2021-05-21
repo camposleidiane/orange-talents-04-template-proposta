@@ -1,10 +1,12 @@
 package zupacademy.leidiane.proposta.proposta;
 
+import zupacademy.leidiane.proposta.proposta.analise.StatusEnum;
+
 public class PropostaResponse {
 	
 	private String documento;
 	private String nome;
-	private Status status;
+	private StatusEnum status;
 
 	public PropostaResponse () {
 	}
@@ -23,7 +25,7 @@ public class PropostaResponse {
 		return nome;
 	}
 
-	public Status getStatus() {
+	public StatusEnum getStatus() {
 		return status;
 	}
 	

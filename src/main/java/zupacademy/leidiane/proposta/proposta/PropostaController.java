@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import feign.FeignException;
+import zupacademy.leidiane.proposta.proposta.analise.AnalisePropostaClient;
+import zupacademy.leidiane.proposta.proposta.analise.AnalisePropostaRequest;
+import zupacademy.leidiane.proposta.proposta.analise.AnalisePropostaResponse;
+import zupacademy.leidiane.proposta.proposta.analise.StatusEnum;
 
 @RestController
 @RequestMapping("/api")
@@ -23,10 +27,10 @@ public class PropostaController {
 	
 	@Autowired PropostaRepository propostaRepository;
 	
-	@Autowired AnaliseSolicitacaoClient analiseClient;
+	@Autowired AnalisePropostaClient analiseClient;
 	
 	@PostMapping("/propostas")
-	public ResponseEntity<?> novaProposta(@RequestBody @Valid NovaPropostaRequest request, UriComponentsBuilder builder) {
+	public ResponseEntity<?> novaProposta(@RequestBody @Valid PropostaRequest request, UriComponentsBuilder builder) {
 		
 		Proposta novaProposta = request.toModel();
 		
@@ -41,15 +45,15 @@ public class PropostaController {
 		
 		
 		try {
-			AnaliseDePropostaRequest analiseRequest = new AnaliseDePropostaRequest(novaProposta.getDocumento(),
+			AnalisePropostaRequest analiseRequest = new AnalisePropostaRequest(novaProposta.getDocumento(),
 																					novaProposta.getNome(),
 																					novaProposta.getId());
-			AnaliseDaPropostaResponse resultadoDaConsulta = analiseClient.consulta(analiseRequest);
-			Status status = resultadoDaConsulta.status();
+			AnalisePropostaResponse resultadoDaConsulta = analiseClient.consulta(analiseRequest);
+			StatusEnum status = resultadoDaConsulta.status();
 			novaProposta.setStatus(status);
 			
 		} catch (FeignException.UnprocessableEntity unprocessableEntity) {
-			novaProposta.setStatus(Status.NAO_ELEGIVEL);
+			novaProposta.setStatus(StatusEnum.NAO_ELEGIVEL);
 		} catch (FeignException.ServiceUnavailable ex) {
 			propostaRepository.delete(novaProposta);
 		}

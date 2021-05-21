@@ -1,4 +1,4 @@
-package zupacademy.leidiane.proposta.validacoes;
+package zupacademy.leidiane.proposta.utils.errors;
 
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;

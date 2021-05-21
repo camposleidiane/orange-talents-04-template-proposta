@@ -1,6 +1,6 @@
-package zupacademy.leidiane.proposta.proposta;
+package zupacademy.leidiane.proposta.proposta.analise;
 
-public class AnaliseDePropostaRequest {
+public class AnalisePropostaRequest {
 	
 	private String documento;
 	private String nome;
@@ -8,10 +8,10 @@ public class AnaliseDePropostaRequest {
 	
 	/** @deprecated apenas para uso da framework **/
 	
-	public AnaliseDePropostaRequest() {
+	public AnalisePropostaRequest() {
 	}
 	
-	public AnaliseDePropostaRequest(String documento, String nome, Long idProposta) {
+	public AnalisePropostaRequest(String documento, String nome, Long idProposta) {
 		super();
 		this.documento = documento;
 		this.nome = nome;

@@ -15,7 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import zupacademy.leidiane.proposta.cartao.Cartao;
-import zupacademy.leidiane.proposta.validacoes.CPForCNPJ;
+import zupacademy.leidiane.proposta.proposta.analise.StatusEnum;
+import zupacademy.leidiane.proposta.utils.validations.CPForCNPJ;
 
 @Entity
 public class Proposta {
@@ -26,7 +27,7 @@ public class Proposta {
 	@NotNull @NotBlank private String nome;
 	@NotNull @NotBlank private String endereco;
 	@NotNull @Positive private BigDecimal salario;
-	@Enumerated(EnumType.STRING) private Status status;
+	@Enumerated(EnumType.STRING) private StatusEnum status;
 	@OneToOne(cascade = CascadeType.ALL) private Cartao cartao;
 	
 	public Proposta () {
@@ -61,11 +62,11 @@ public class Proposta {
 		return salario;
 	}	
 	
-	public Status getStatus() {
+	public StatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusEnum status) {
 		this.status = status;	
 	}
 	
