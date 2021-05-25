@@ -21,5 +21,4 @@ public class CartaoRequest {
 	public Long getIdProposta() {
 		return idProposta;
 	}
-
 }

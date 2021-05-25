@@ -35,14 +35,17 @@ public class PropostaController {
 		Proposta novaProposta = request.toModel();
 		
 		Optional<Proposta> propDocumento = propostaRepository.findByDocumento(novaProposta.getDocumento());
+		Optional<Proposta> propEmail = propostaRepository.findByEmail(novaProposta.getEmail());
 		
 		if(propDocumento.isPresent()) {
 			return ResponseEntity.status(422).body("Já existe uma proposta para esse solicitante!");
 		}
 		
+		if(propEmail.isPresent()) {
+			return ResponseEntity.status(422).body("Já existe uma proposta para esse solicitante!");
+		}
+		
 		propostaRepository.save(novaProposta);
-		
-		
 		
 		try {
 			AnalisePropostaRequest analiseRequest = new AnalisePropostaRequest(novaProposta.getDocumento(),

@@ -14,6 +14,8 @@ public interface PropostaRepository extends CrudRepository<Proposta, Long> {
 	
 	Optional<Proposta> findById (Long id);
 	
+	Optional<Proposta> findByEmail(String email);
+	
 	@Query("SELECT p FROM Proposta p WHERE p.status = 'ELEGIVEL'" +
 	        "AND p.cartao.id = NULL")
 	Set<Proposta>propostasElegiveis();
