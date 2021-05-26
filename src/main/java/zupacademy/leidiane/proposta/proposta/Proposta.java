@@ -3,6 +3,7 @@ package zupacademy.leidiane.proposta.proposta;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,13 +17,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import zupacademy.leidiane.proposta.cartao.Cartao;
 import zupacademy.leidiane.proposta.proposta.analise.StatusEnum;
+import zupacademy.leidiane.proposta.utils.criptografia.CriptografaDados;
 import zupacademy.leidiane.proposta.utils.validations.CPForCNPJ;
 
 @Entity
 public class Proposta {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-	@NotNull @NotBlank @CPForCNPJ private String documento;
+	@Convert(converter=CriptografaDados.class) @NotNull @NotBlank @CPForCNPJ private String documento;
 	@NotNull @NotBlank @Email private String email;
 	@NotNull @NotBlank private String nome;
 	@NotNull @NotBlank private String endereco;

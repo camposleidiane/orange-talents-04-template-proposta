@@ -3,6 +3,7 @@ package zupacademy.leidiane.proposta.cartao;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,12 +15,13 @@ import javax.persistence.OneToOne;
 import zupacademy.leidiane.proposta.cartao.bloqueio.BloqueioCartao;
 import zupacademy.leidiane.proposta.cartao.bloqueio.StatusCartao;
 import zupacademy.leidiane.proposta.proposta.Proposta;
+import zupacademy.leidiane.proposta.utils.criptografia.CriptografaDados;
 
 @Entity
 public class Cartao {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String numero;
+	@Convert(converter=CriptografaDados.class) private String numero;
 	private String titular;
 	private LocalDateTime dataEmissao;
 	@OneToOne(mappedBy= "cartao") private Proposta proposta;
