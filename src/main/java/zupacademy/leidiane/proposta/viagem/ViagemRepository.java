@@ -1,6 +1,6 @@
 package zupacademy.leidiane.proposta.viagem;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ViagemRepository extends CrudRepository <Viagem, Long>{
+public interface ViagemRepository extends JpaRepository <Viagem, Long>{
 }

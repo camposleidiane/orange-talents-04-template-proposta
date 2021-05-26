@@ -1,7 +1,7 @@
 package zupacademy.leidiane.proposta.biometria;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BiometriaRepository extends CrudRepository <Biometria, Long> {
+public interface BiometriaRepository extends JpaRepository <Biometria, Long> {
 
 }

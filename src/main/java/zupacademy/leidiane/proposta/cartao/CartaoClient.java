@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import zupacademy.leidiane.proposta.cartao.bloqueio.BloqueioCartaoRequest;
+import zupacademy.leidiane.proposta.carteira.CarteiraRequest;
 import zupacademy.leidiane.proposta.viagem.ViagemRequest;
 
 @FeignClient(name="cartoes", url="${cartao.host}")
@@ -21,5 +22,8 @@ public interface CartaoClient {
 	
 	@PostMapping ("api/cartoes/{id}/avisos")
 	void avisaViagem(@PathVariable("id") String id, @RequestBody ViagemRequest request);
+	
+	@PostMapping ("api/cartoes/{id}/carteiras")
+	void adicionaCarteira(@PathVariable("id") String id, @RequestBody CarteiraRequest request);
 }
 	

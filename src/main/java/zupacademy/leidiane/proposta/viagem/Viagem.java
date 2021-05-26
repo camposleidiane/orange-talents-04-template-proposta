@@ -12,6 +12,8 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import zupacademy.leidiane.proposta.cartao.Cartao;
 
 @Entity
@@ -20,7 +22,7 @@ public class Viagem {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	@NotNull @NotBlank private String destino;
 	@NotNull @Future private LocalDate validoAte;
-	private LocalDateTime instanteAviso;
+	@CreationTimestamp private LocalDateTime instanteAviso;
 	private String ipCliente;
 	private String userAgent;
 	@ManyToOne private Cartao cartao;

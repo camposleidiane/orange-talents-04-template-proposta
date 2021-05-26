@@ -1,6 +1,6 @@
 package zupacademy.leidiane.proposta.cartao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CartaoRepository extends CrudRepository <Cartao, Long> {
+public interface CartaoRepository extends JpaRepository <Cartao, Long> {
 }
